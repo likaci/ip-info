@@ -5,15 +5,12 @@ import NetworkInfo from './NetworkInfo'
 
 ReactDOM.render(
     (
-        <ul>
-            <h1 className="text-3xl font-bold underline">
-                Hello world!
-            </h1>
+        <div className="grid gap-6 lg:p-10 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
             <NetworkInfo name={"Direct"} url={"http://direct.ipapi.xiazhiri.com/json/?lang=zh-CN"}/>
             <NetworkInfo name={"Home"} url={"http://home.ipapi.xiazhiri.com/json/?lang=zh-CN"}/>
             <NetworkInfo name={"Proxy"} url={"http://proxy.ipapi.xiazhiri.com/json/?lang=zh-CN"}/>
             <NetworkInfo name={"Work"} url={"http://work.ipapi.xiazhiri.com/json/?lang=zh-CN"}/>
-        </ul>
+        </div>
     ),
     document.getElementById('root')
 );
