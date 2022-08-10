@@ -20,8 +20,8 @@ class NetworkInfo extends React.Component {
                     <div className="flex-1">
                         <h2 className="card-title text-primary">{this.props.name}</h2>
                         <p className="text-base-content text-opacity-90">{isLoaded ? (error ? "Error" : data.query) : "Loading"}</p>
-                        <p className="text-base-content text-opacity-90">{isLoaded && !error ? data.city : "-"}</p>
-                        <p className="text-base-content text-opacity-90">{isLoaded ? (data.org ? data.org : data.isp) : "-"}</p>
+                        <p className="text-base-content text-opacity-90">{isLoaded && data && !error ? data.city : "-"}</p>
+                        <p className="text-base-content text-opacity-90">{isLoaded && data ? (data.org ? data.org : data.isp) : "-"}</p>
                     </div>
                     <div className="flex space-x-2 flex-0">
                         <button className="btn btn-sm btn-square" onClick={this.refreshData}>

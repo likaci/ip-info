@@ -8,18 +8,23 @@ export default async function handler(req, res) {
     console.log(req.body);
     console.log(req.url);
 
-    // /ip/192.168.2.1?lang=zh-CN&key=EEKS6bLi6D91G1p
+    // json|xml|csv|line
     // json?lang=zh-CN&key=EEKS6bLi6D91G1p
-    // json/?lang=zh-CN&key=EEKS6bLi6D91G1p
+    // json/192.168.2.1
     // json/192.168.2.1?lang=zh-CN&key=EEKS6bLi6D91G1p
 
-    let url = req.url.replace(/\\ip/g, "");
+    let url = req.url;
 
-    let key = res.query?.key || "EEKS6bLi6D91G1p";
-    let lang = res.query?.lang || "zh-CN";
-
-    // let uri = `https://pro.ip-api.com/json/${req.headers["x-real-ip"]}?lang=${lang}&key=${key}`;
-    let uri = `https://pro.ip-api.com/json/${req.headers["x-real-ip"]}?lang=${lang}&key=${key}`;
-    console.log(uri);
-    request(uri).pipe(res);
+    if (url.match(/^\/(json|xml|csv|line)$/g)) {
+        url += `/${req.headers["x-real-ip"]}`
+    }
+    if (!req.query?.key) {
+        url += (url.includes("?") ? "&" : "?") + "key=EEKS6bLi6D91G1p";
+    }
+    if (!req.query?.lang) {
+        url += (url.includes("?") ? "&" : "?") + "lang=zh-CN"
+    }
+    url = `https://pro.ip-api.com${url}`;
+    console.log(url);
+    request(url).pipe(res);
 }
