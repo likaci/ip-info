@@ -12,21 +12,24 @@ const NetworkInfo = ({ name, url }) => {
             .then(res => {
                 setNetworkInfo(res.data)
             })
+            .catch(error => {
+                setNetworkInfo({ error: error.message })
+            })
     }
 
     useEffect(() => {
         fetchNetworkInfo()
     }, [])
 
-    return <div className="flex flex-col flex-wrap min-w-72 h-36 place-content-between p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    return <div className="flex flex-col flex-wrap h-36 place-content-between p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         {/* name */}
         <a className="text-xl font-bold text-gray-900 dark:text-white">{name}</a>
         {networkInfo ?
             // info
-            <div className="text-gray-700 dark:text-gray-400">
-                <a className="h-4 mb-2.5 block"> {networkInfo?.query} </a>
-                <a className="h-4 mb-2.5 block"> {networkInfo?.city}{networkInfo?.country} </a>
-                <a className="h-4 mb-2.5 block"> {networkInfo?.isp} </a>
+            <div className="flex flex-col text-gray-700 dark:text-gray-400">
+                <a className="h-4 mb-2.5 "> {networkInfo.error || networkInfo?.query} </a>
+                <a className="h-4 mb-2.5 "> {networkInfo?.city} {networkInfo?.country} </a>
+                <a className="h-4 mb-2.5 "> {networkInfo?.isp} </a>
             </div>
             :
             // loading

@@ -1,7 +1,7 @@
 import NetworkInfo from './components/NetworkInfo'
 
 export const metadata = {
-  title: 'ip',
+  title: 'ip info',
 }
 
 export default async function Page() {
